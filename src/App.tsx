@@ -1,7 +1,7 @@
 /*
  * @Author: kingford
  * @Date: 2021-03-30 12:31:03
- * @LastEditTime: 2021-03-30 22:43:13
+ * @LastEditTime: 2021-03-30 22:48:38
  */
 import React from "react";
 import logo from "./logo.svg";
@@ -13,7 +13,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload. test rule
+          Edit <code>src/App.tsx</code> and save to reload. test rule of commit
         </p>
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
