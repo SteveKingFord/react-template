@@ -4,21 +4,12 @@
  * @LastEditTime: 2021-03-30 22:48:38
  */
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { ProjectList } from 'pages/project-list'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload. test rule of commit
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+      <ProjectList></ProjectList>
     </div>
   );
 }
