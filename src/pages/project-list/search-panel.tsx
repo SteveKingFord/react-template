@@ -1,6 +1,29 @@
+/*
+ * @Author: kingford
+ * @Date: 2021-04-03 11:36:32
+ * @LastEditTime: 2021-04-03 14:35:26
+ */
 import React from 'react';
 
-export const SearchPanel = ({ users, param, setParam }) => {
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  title: string;
+  organization: string;
+}
+
+interface ISearchPanelProps {
+  users: IUser[];
+  param: {
+    name: string;
+    personId: string;
+  }
+  setParam: (param: ISearchPanelProps['param']) => void
+}
+
+
+export const SearchPanel = ({ users, param, setParam }: ISearchPanelProps) => {
   return (
     <form>
       <input type="text" value={param.name} onChange={(evt) => setParam({ ...param, name: evt.target.value })} />

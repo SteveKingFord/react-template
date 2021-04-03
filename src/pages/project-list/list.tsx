@@ -1,6 +1,27 @@
+/*
+ * @Author: kingford
+ * @Date: 2021-04-03 11:36:13
+ * @LastEditTime: 2021-04-03 14:36:15
+ */
 import React from "react";
+import { IUser } from './search-panel'
 
-export const List = ({ list, users }) => {
+
+interface IProject {
+  id: string;
+  name: string;
+  personId: string;
+  pin: boolean;
+  organization: string
+}
+
+interface IListProps {
+  list: IProject[];
+  users: IUser[]
+}
+
+
+export const List = ({ list, users }: IListProps) => {
   return (
     <table>
       <thead>
