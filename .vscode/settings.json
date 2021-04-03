@@ -1,0 +1,10 @@
+{
+  // 配置css模块加载
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "fileheader.customMade": {
+    "Author": "kingford",
+    "Date": "Do not edit", // 文件创建时间(不变)
+    "LastEditTime": "Do not edit" // 文件最后编辑时间
+  }
+}

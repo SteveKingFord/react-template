@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode", // Prettier - Code formatter
+    "ms-vscode.vscode-typescript-tslint-plugin", // TSLint
+    "visualstudioexptteam.vscodeintellicode", // Visual Studio IntelliCode
+    "christian-kohler.path-intellisense", // Path Intellisense
+    "donjayamanne.githistory", //Git History
+    "eamodio.gitlens", // GitLens — Git supercharged
+    "vscode-icons-team.vscode-icons", //vscode icons
+    "johnpapa.angular2", //Angular Snippets (Version 11)
+    "cyrilletuzi.angular-schematics", // Angular Schematics
+    "skyran.js-jsx-snippets", // JS JSX Snippets
+    "yoyo930021.vuter", // Vuter
+    "oderwat.indent-rainbow", // indent-rainbow
+    "obkoro1.korofileheader", // koroFileHeader
+    "formulahendry.auto-close-tag", // Auto Close Tag
+    "formulahendry.auto-rename-tag", // Auto Rename Tag
+    "wix.vscode-import-cost" // Import Cost
+  ]
+}
