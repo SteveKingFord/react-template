@@ -1,7 +1,7 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-03 11:08:15
- * @LastEditTime: 2021-04-05 11:31:54
+ * @LastEditTime: 2021-04-05 12:43:56
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -9,11 +9,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { loadDevTools } from 'jira-dev-tool'
-
+import { AppProviders } from 'context'
 
 loadDevTools(() => ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppProviders>
+      <App />
+    </AppProviders>
   </React.StrictMode>,
   document.getElementById('root')
 ))

@@ -1,7 +1,7 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-03 11:36:32
- * @LastEditTime: 2021-04-03 14:35:26
+ * @LastEditTime: 2021-04-05 11:47:29
  */
 import React from 'react';
 
@@ -11,6 +11,7 @@ export interface IUser {
   email: string;
   title: string;
   organization: string;
+  token: string;
 }
 
 interface ISearchPanelProps {
