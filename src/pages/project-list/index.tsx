@@ -1,15 +1,15 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-03 11:35:51
- * @LastEditTime: 2021-04-03 15:44:06
+ * @LastEditTime: 2021-04-05 16:01:06
  */
 import React, { useState, useEffect } from 'react';
 import { cleanObject } from 'utils';
 import { useMount, useDebounce } from 'hooks';
+import { useHttp } from 'hooks/http';
 import { SearchPanel } from './search-panel';
 import { List } from './list';
-import qs from 'qs';
-const apiUrl = process.env.REACT_APP_API_URL;
+
 
 export const ProjectList = () => {
   const [param, setParam] = useState({
@@ -19,21 +19,14 @@ export const ProjectList = () => {
   const debounceParam = useDebounce(param, 500);
   const [users, setUsers] = useState([]);
   const [list, setList] = useState([]);
+  const http = useHttp()
 
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`).then(async (response) => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    });
+    http('projects', { data: cleanObject(debounceParam) }).then(setList)
   }, [debounceParam]);
 
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
-    });
+    http('users').then(setUsers)
   });
 
   return (

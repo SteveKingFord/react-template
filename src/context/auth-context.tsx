@@ -1,16 +1,30 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-05 12:04:18
- * @LastEditTime: 2021-04-05 12:59:35
+ * @LastEditTime: 2021-04-05 16:09:58
  */
 import React, { ReactNode, useState } from 'react'
 import * as auth from 'auth/auth-provider'
 import { IUser } from '../pages/project-list/search-panel';
+import { http } from 'hooks/http';
+import { useMount } from 'hooks';
 
 interface IAuthForm {
     username: string;
     password: string;
 }
+
+
+const bootstrapUser = async () => {
+    let user = null
+    const token = auth.getToken()
+    if (token) {
+        const data = await http('me', { token })
+        user = data.user
+    }
+    return user
+}
+
 
 const AuthContext = React.createContext<{
     user: IUser | null,
@@ -27,6 +41,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const login = (form: IAuthForm) => auth.login(form).then(setUser)
     const register = (form: IAuthForm) => auth.register(form).then(setUser)
     const logout = () => auth.logout().then(() => setUser(null))
+
+    useMount(() => {
+        bootstrapUser().then(setUser)
+    })
 
     return <AuthContext.Provider children={children} value={{ user, login, register, logout }}></AuthContext.Provider>
 }
