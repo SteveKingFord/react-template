@@ -2,6 +2,8 @@
   // 配置css模块加载
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
+  // 自动整理所有引用import
+  //"editor.codeActionsOnSave": { "source.organizeImports": true },
   "fileheader.customMade": {
     "Author": "kingford",
     "Date": "Do not edit", // 文件创建时间(不变)

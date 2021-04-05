@@ -1,13 +1,13 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-03 15:21:31
- * @LastEditTime: 2021-04-05 13:00:23
+ * @LastEditTime: 2021-04-05 13:24:37
  */
 import { useAuth } from 'context/auth-context';
 import React, { FormEvent } from 'react';
 
 export const Login = () => {
-  const { login, user } = useAuth()
+  const { login, user } = useAuth();
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -18,7 +18,13 @@ export const Login = () => {
   };
   return (
     <form onSubmit={submit}>
-      {user ? <div>用户名：{user?.name},token:{user?.token}</div> : ''}
+      {user ? (
+        <div>
+          用户名：{user?.name},token:{user?.token}
+        </div>
+      ) : (
+        ''
+      )}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id="username" name="username" />
