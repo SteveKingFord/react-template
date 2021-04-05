@@ -1,15 +1,28 @@
+/*
+ * @Author: kingford
+ * @Date: 2021-04-03 11:08:15
+ * @LastEditTime: 2021-04-05 11:31:54
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { loadDevTools } from 'jira-dev-tool'
 
-ReactDOM.render(
+
+loadDevTools(() => ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
-);
+))
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
