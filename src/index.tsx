@@ -1,24 +1,27 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-03 11:08:15
- * @LastEditTime: 2021-04-05 12:43:56
+ * @LastEditTime: 2021-04-07 13:10:22
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { loadDevTools } from 'jira-dev-tool'
-import { AppProviders } from 'context'
+import { loadServer, DevTools } from 'jira-dev-tool';
+import { AppProviders } from 'context';
 
-loadDevTools(() => ReactDOM.render(
-  <React.StrictMode>
-    <AppProviders>
-      <App />
-    </AppProviders>
-  </React.StrictMode>,
-  document.getElementById('root')
-))
+loadServer(() =>
+  ReactDOM.render(
+    <React.StrictMode>
+      <AppProviders>
+        <DevTools />
+        <App />
+      </AppProviders>
+    </React.StrictMode>,
+    document.getElementById('root')
+  )
+);
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App />
