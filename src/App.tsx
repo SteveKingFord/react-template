@@ -1,17 +1,22 @@
 /*
  * @Author: kingford
  * @Date: 2021-03-30 12:31:03
- * @LastEditTime: 2021-04-07 13:16:58
+ * @LastEditTime: 2021-04-08 18:15:26
  */
 import React from 'react';
-import { useAuth } from 'context/auth-context';
-import { AuthenticatedApp } from 'auth/authenticated-app';
-import { UnauthenticatedApp } from 'auth/unauthenticated-app';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Home } from './pages/home';
+import { About } from './pages/about';
 
 const App: React.FC = () => {
-  const { user } = useAuth();
-
-  return <div className="App">{user ? <AuthenticatedApp /> : <UnauthenticatedApp />}</div>;
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route path="/about" component={About}></Route>
+      </Switch>
+    </Router>
+  );
 };
 
 export default App;

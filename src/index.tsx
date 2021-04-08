@@ -1,7 +1,7 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-03 11:08:15
- * @LastEditTime: 2021-04-07 13:10:22
+ * @LastEditTime: 2021-04-08 18:27:03
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,6 +10,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { loadServer, DevTools } from 'jira-dev-tool';
 import { AppProviders } from 'context';
+import './i18n/config';
 
 loadServer(() =>
   ReactDOM.render(
