@@ -1,7 +1,7 @@
 /*
  * @Author: kingford
  * @Date: 2021-03-30 12:31:03
- * @LastEditTime: 2021-04-13 14:44:58
+ * @LastEditTime: 2021-04-13 22:40:33
  */
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -18,6 +18,7 @@ const App: React.FC = () => {
         <Route exact path="/home" component={Home}></Route>
         <Route exact path="/material" component={Material}></Route>
         <Route path="/about" component={About}></Route>
+        <Route path="*" component={Pubmed}></Route>
       </Switch>
     </Router>
   );
