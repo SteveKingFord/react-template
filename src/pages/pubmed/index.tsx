@@ -1,16 +1,32 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-12 18:55:21
- * @LastEditTime: 2021-04-13 23:02:12
+ * @LastEditTime: 2021-05-23 19:27:04
  */
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
 import Pagination from '@material-ui/lab/Pagination';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { Skeleton } from '@material-ui/lab';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import styles from './index.module.css'
+
+
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+    marginBottom: 20
+  }
+});
+
 
 export const Pubmed: React.FC = () => {
+  const classes = useStyles();
+
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
@@ -18,11 +34,8 @@ export const Pubmed: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // http://bcore.top/api/article
-    // http://localhost:8080
-    // getList();
     setIsLoading(true);
-    axios.get(`http://bcore.top/api/article?pageSize=10&pageIndex=${pageIndex}`).then((res) => {
+    axios.get(`http://bcore.top/api/pubmed/fatty-liver?pageSize=10&pageIndex=${pageIndex}`).then((res) => {
       const { data, total } = res.data;
       setList(data);
       setTotal(total);
@@ -35,9 +48,11 @@ export const Pubmed: React.FC = () => {
   const handleChange = (event: any, value: number) => {
     console.log(event, value);
     setPageIndex(value);
+    window.scrollTo(0, 0)
+
   };
 
-  function seleton() {
+  function skeleton() {
     return (
       <div>
         <Skeleton />
@@ -49,43 +64,56 @@ export const Pubmed: React.FC = () => {
 
   return (
     <Container>
-      {isLoading ? seleton() : ''}
-      {list.map((item: any) => {
-        return (
-          <Article key={item.ID}>
-            <HeadTitle>
-              <PageIndex>{item.ID}</PageIndex>
-              <a href={'https://pubmed.ncbi.nlm.nih.gov' + item.href} target="_blank">
-                {item.title}
-              </a>
-            </HeadTitle>
-            <AuthorList>
-              {item.authors.map((author: any, index: number) => {
-                return (
-                  <AuthorItem key={author.ID}>
-                    {author.name}
-                    {index === 0 && <sup>1</sup>} ,
-                  </AuthorItem>
-                );
-              })}
-            </AuthorList>
-            <div>
-              <Abstract>Abstract</Abstract>
-              {item.abstracts.map((abs: any) => {
-                return (
-                  <ArticleItem key={abs.ID}>
-                    <strong>{abs.strong}</strong>
-                    {abs.content}
-                  </ArticleItem>
-                );
-              })}
-            </div>
-          </Article>
-        );
-      })}
+      {isLoading ? skeleton() : ''}
+      <NowPage><Button variant="contained" color="secondary">
+        当前页：{pageIndex}
+      </Button></NowPage>
+      <ArticleContainer>
+        {list.map((item: any) => {
+          return (
+            <Card className={classes.root}>
+              <CardContent>
+                <Typography color="textSecondary" gutterBottom>
+                  <HeadTitle>
+                    <a className={styles.link} href={'https://pubmed.ncbi.nlm.nih.gov' + item.href} target="_blank" rel="noreferrer">
+                      {item.title}
+                    </a>
+                  </HeadTitle>
+                </Typography>
+                <Typography color="textSecondary" gutterBottom>
+                  <AuthorList>
+                    {item.fatty_liver_author.map((author: any, index: number) => {
+                      return (
+                        <AuthorItem key={author.ID}>
+                          {author.name}
+                          <sup>{index + 1}</sup>
+                        </AuthorItem>
+                      );
+                    })}
+                  </AuthorList>
+                </Typography>
+                <Typography color="textSecondary" gutterBottom>
+                  <Abstract>Abstract</Abstract>
+                  {item.fatty_liver_abstracts.map((abs: any) => {
+                    return (
+                      <ArticleItem key={abs.ID}>
+                        <strong>{abs.strong}</strong> &nbsp;
+                        {abs.content}
+                      </ArticleItem>
+                    );
+                  })}
+                </Typography>
+
+              </CardContent>
+
+            </Card>
+          )
+        })}
+
+      </ArticleContainer>
       <PaginationBox>
         <span>总数：{total}</span>
-        <Pagination count={totalPage} color="primary" onChange={handleChange} />
+        <Pagination count={totalPage} color="secondary" onChange={handleChange} />
       </PaginationBox>
     </Container>
   );
@@ -94,19 +122,23 @@ export const Pubmed: React.FC = () => {
 const Container = styled.div`
   max-width: 100rem;
   margin: 0 auto;
-  padding: 9rem 0 2rem;
+  padding:   2rem;
+  position: relative;
+
 `;
 
-const Article = styled.article`
-  padding: 20px;
-  font-size: 1.8rem;
-  background: #fff;
-  margin-bottom: 2rem;
+
+const ArticleContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
 `;
+
 
 const HeadTitle = styled.h1`
   font-size: 2.6rem;
   line-height: 1.4;
+ 
   margin: 0 0 1.6rem;
   word-wrap: break-word;
 `;
@@ -120,6 +152,7 @@ const AuthorItem = styled.span`
   display: inline-block;
   color: #0071bc;
   line-height: 1.5;
+  margin-right: 1rem;
 `;
 
 const Abstract = styled.h2`
@@ -132,6 +165,8 @@ const Abstract = styled.h2`
 const ArticleItem = styled.p`
   margin: 1.2rem 0;
   text-indent: 2em;
+  font-size: 2rem;
+  color: #212121;
 `;
 
 const PaginationBox = styled.div`
@@ -140,16 +175,10 @@ const PaginationBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
 `;
 
-const PageIndex = styled.span`
-  padding: 0.2rem 0.8rem;
-  color: #fff;
-  background: #d1d1ea;
-  margin-right: 2rem;
-  border-radius: 0.4rem;
+const NowPage = styled.span`
+  position: fixed;
+  left: 10%;
+  top: 2rem;
 `;
