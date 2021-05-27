@@ -1,7 +1,7 @@
 /*
  * @Author: kingford
  * @Date: 2021-04-12 18:55:21
- * @LastEditTime: 2021-05-23 19:27:04
+ * @LastEditTime: 2021-05-24 01:00:44
  */
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
@@ -13,16 +13,20 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
 import styles from './index.module.css'
-
-
+import Chip from '@material-ui/core/Chip';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    marginBottom: 20
+    marginBottom: 20,
+    position: "relative",
+    paddingRight: 20,
+    paddingLeft: 20,
+    paddingTop: 10
   }
 });
-
 
 export const Pubmed: React.FC = () => {
   const classes = useStyles();
@@ -72,6 +76,7 @@ export const Pubmed: React.FC = () => {
         {list.map((item: any) => {
           return (
             <Card className={classes.root}>
+              <PageIndex>{item.ID}</PageIndex>
               <CardContent>
                 <Typography color="textSecondary" gutterBottom>
                   <HeadTitle>
@@ -103,7 +108,17 @@ export const Pubmed: React.FC = () => {
                     );
                   })}
                 </Typography>
-
+                <CardActions className="flex-ac-jb">
+                  <Chip
+                    icon={<LabelImportantIcon />}
+                    label={item.type}
+                    color="secondary"
+                  />
+                  <EupData>
+                    <span>发布日期：</span>
+                    <strong> {item.eup_date}</strong>
+                  </EupData>
+                </CardActions>
               </CardContent>
 
             </Card>
@@ -118,7 +133,6 @@ export const Pubmed: React.FC = () => {
     </Container>
   );
 };
-
 const Container = styled.div`
   max-width: 100rem;
   margin: 0 auto;
@@ -138,7 +152,6 @@ const ArticleContainer = styled.div`
 const HeadTitle = styled.h1`
   font-size: 2.6rem;
   line-height: 1.4;
- 
   margin: 0 0 1.6rem;
   word-wrap: break-word;
 `;
@@ -179,6 +192,19 @@ const PaginationBox = styled.div`
 
 const NowPage = styled.span`
   position: fixed;
-  left: 10%;
-  top: 2rem;
+  left: 6rem;
+  top:8rem;
 `;
+
+const PageIndex = styled.span`
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  padding: 1rem 2rem;
+  background-color: #f50057;
+`;
+
+const EupData = styled.div`
+  font-size: 1.6rem;
+`
