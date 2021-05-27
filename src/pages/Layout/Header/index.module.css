@@ -1,0 +1,14 @@
+.nav {
+    list-style: none;
+    display: flex;
+    float: right;
+}
+.navItem {
+    color:#000;
+    font-size: 1.6rem;
+    margin-right: 2rem;
+    cursor: pointer
+}
+.navItem:hover{
+    color:#f50057;
+}
