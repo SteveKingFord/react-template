@@ -7,8 +7,6 @@ html {
   src: url('../assets/fonts/PingFangSC.ttf') format('opentype');
 }
 
-
-
 html body {
   margin: 0;
   background: #f5f5f5;
@@ -21,3 +19,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  background: #fff;
+}
+
+.footer a {
+  text-decoration: none;
+}
